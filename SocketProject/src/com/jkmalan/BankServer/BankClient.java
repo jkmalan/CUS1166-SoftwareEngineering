@@ -7,8 +7,16 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
+/**
+ * Connects to a BankServer to send commands in order to manage bank accounts
+ *
+ * @author jkmalan (aka John Malandrakis)
+ */
 public class BankClient {
 
+    /**
+     * A static method that connects to a server on port 8008
+     */
     public static void connect() {
         try {
             Socket socket = new Socket("127.0.0.1", 8008);
