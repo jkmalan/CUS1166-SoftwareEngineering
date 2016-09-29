@@ -171,6 +171,15 @@ public class CalculatorFrame extends JFrame {
         });
         buttons.add(buttonMod);
 
+        JButton buttonDec = new JButton(".");
+        buttonDec.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                display.append(".\n");
+            }
+        });
+        buttons.add(buttonDec);
+
         JButton buttonCle = new JButton("CE");
         buttonCle.addActionListener(new ActionListener() {
             @Override
@@ -188,8 +197,6 @@ public class CalculatorFrame extends JFrame {
             }
         });
         buttons.add(buttonEnt);
-
-
 
     }
 
