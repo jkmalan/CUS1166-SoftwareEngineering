@@ -15,10 +15,14 @@ import java.util.*;
  */
 public class BankServer implements Runnable {
 
+    private static final int SERVER_PORT = 8008;
+
     /**
      * A Runnable method that begins the server process on port 8008
      */
     public void run() {
+
+        // For the small scope of this project, this should be more efficient than BankAccount objects
         Map<String, Double> accounts = new HashMap<>();
 
         // Initialize some accounts for the sake of simplicity
@@ -34,7 +38,7 @@ public class BankServer implements Runnable {
         accounts.put("ralph", 100.0);
 
         try {
-            ServerSocket server = new ServerSocket(8008);
+            ServerSocket server = new ServerSocket(SERVER_PORT);
 
             while (true) {
                 Socket client = server.accept();
