@@ -21,6 +21,18 @@ public class BankServer implements Runnable {
     public void run() {
         Map<String, Double> accounts = new HashMap<>();
 
+        // Initialize some accounts for the sake of simplicity
+        accounts.put("john", 1100.0);
+        accounts.put("brian", 600.0);
+        accounts.put("uche", 200.0);
+        accounts.put("celeste", 700.0);
+        accounts.put("kamila", 50.0);
+        accounts.put("nicholas", 300.0);
+        accounts.put("james", 1600.0);
+        accounts.put("ying", 32000.0);
+        accounts.put("jason", 0.50);
+        accounts.put("ralph", 100.0);
+
         try {
             ServerSocket server = new ServerSocket(8008);
 
@@ -41,7 +53,7 @@ public class BankServer implements Runnable {
                         // If argument 1 is an asterisk, list all account balances
                         if (args[1].equalsIgnoreCase("*")) {
 
-                            data = "- - Accounts - -";
+                            data = "\n- - Accounts - -";
                             for (Map.Entry<String, Double> account : accounts.entrySet()) {
                                 data += "\n" + account.getKey() + ": $" + account.getValue();
                             }
@@ -49,7 +61,8 @@ public class BankServer implements Runnable {
                         // If argument 1 is a valid account name, display account balance
                         } else if (accounts.containsKey(args[1])) {
 
-                            data = "\n" + args[1] + ": $" + accounts.get(args[1]);
+                            data = "\n- - Account - -";
+                            data += "\n" + args[1] + ": $" + accounts.get(args[1]);
 
                         // If argument 1 is an invalid argument, display input error
                         } else {
@@ -65,7 +78,9 @@ public class BankServer implements Runnable {
 
                             double temp = accounts.get(args[1]) + Double.parseDouble(args[2]);
                             accounts.put(args[1], temp);
-                            data = "\n" + args[1] + ": $" + accounts.get(args[1]);
+
+                            data = "\n- - Account - -";
+                            data += "\n" + args[1] + ": $" + accounts.get(args[1]);
 
                         // If argument 1 is an invalid argument, display input error
                         } else {
@@ -82,7 +97,9 @@ public class BankServer implements Runnable {
                             double newBal = accounts.get(args[1]) - Double.parseDouble(args[2]);
                             if (newBal >= 0) {
                                 accounts.put(args[1], newBal);
-                                data = "\n" + args[1] + ": $" + accounts.get(args[1]);
+
+                                data = "\n- - Account - -";
+                                data += "\n" + args[1] + ": $" + accounts.get(args[1]);
                             } else {
                                 data = "The specified amount exceeds available funds!";
                             }
@@ -99,7 +116,7 @@ public class BankServer implements Runnable {
                         // If argument 1 is a non-existent account name, create a new account with argument 2 as the balance
                         if (!accounts.containsKey(args[1])) {
                             accounts.put(args[1], Double.parseDouble(args[2]));
-                            data = "The balance for account [" + args[1] + "] is $" + accounts.get(args[1]).toString();
+                            data = "Created account [" + args[1] + "] with an initial balance of $" + accounts.get(args[1]).toString();
 
                         // If argument 1 is an existing account name, display input error
                         } else {
